@@ -82,14 +82,21 @@ include 'components/wishlist_cart.php';
 
                <div class="swiper-slide slide">
                   <div class="image">
-                     <img src="images/gro1.avif" alt="">
+                     <img src="images/h.jpg" alt="">
                   </div>
                   <div class="content">
                      <span>upto 50% off</span>
                      <h3>on vegetables</h3>
-                     <a href="shop.php" class="btn">shop now</a>
+                     <a href="category.php?category=Vegetables" class="btn">Shop now</a>
                   </div>
                </div>
+
+               <!-- <div class="swiper-slide slide">
+                  <div class="image">
+                     <img src="images/h1.jpg" alt="">
+                  </div>
+                  
+               </div> -->
 
                <!-- <div class="swiper-slide slide"> -->
                <!-- <div class="image">
@@ -125,30 +132,30 @@ include 'components/wishlist_cart.php';
                <h3>Fruits</h3>
             </a>
 
-            <a href="category.php?category=tv" class="swiper-slide slide">
+            <a href="category.php?category=Vegetables" class="swiper-slide slide">
                <img src="images/veglogo.jpg" alt="">
                <h3>Vegetables</h3>
             </a>
 
-            <a href="category.php?category=camera" class="swiper-slide slide">
+            <a href="category.php?category=Milk" class="swiper-slide slide">
                <img src="images/dairylogo.jpeg" alt="">
                <h3>Dairy</h3>
             </a>
 
-            <a href="category.php?category=mouse" class="swiper-slide slide">
+            <!-- <a href="category.php?category=mouse" class="swiper-slide slide">
                <img src="images/bevarages.avif" alt="">
                <h3>Beavarages</h3>
-            </a>
+            </a> -->
 
             <!-- <a href="category.php?category=fridge" class="swiper-slide slide">
       <img src="images/snacks.jpg" alt="">
       <h3>Snacks</h3>
    </a> -->
 
-            <a href="category.php?category=washing" class="swiper-slide slide">
+            <!-- <a href="category.php?category=washing" class="swiper-slide slide">
                <img src="images/icon-6.png" alt="">
                <h3>washing machine</h3>
-            </a>
+            </a> -->
 
             <!-- <a href="category.php?category=smartphone" class="swiper-slide slide">
       <img src="images/icon-7.png" alt="">
@@ -196,16 +203,32 @@ include 'components/wishlist_cart.php';
                         <?= $fetch_product['name']; ?>
                      </div>
 
-                     <div class="discount-div">
-                        <span><?= $fetch_product['discount']; ?>%</span><span>Off</span>
-                     </div>
+                     <?php
+                     if ($fetch_product['discount'] !== null && $fetch_product['discount'] !== 0) {
+                        echo '<div class="discount-div">';
+                        echo '<span>' . $fetch_product['discount'] . '%</span><span>Off</span>';
+                        echo '</div>';
+                     }
+                     ?>
+
 
                      <div class="flex">
                         <div class="price"> 
-                        <span class="og-price">₹ <?= $fetch_product['price']; ?></span>
-                        <span>₹ </span><?=$fetch_product['price'] - $fetch_product['price']*$fetch_product['discount']/100; ?><span></span>
+                        <?php
+                           if ($fetch_product['discount'] !== null && $fetch_product['discount'] !== 0) {
+                              echo '<span class="og-price">₹ ' . $fetch_product['price'] . '  </span>';
+                              // echo '<span>₹ ' . $fetch_product['price'] - $fetch_product['price']*$fetch_product['discount']/100 . '</span>';
+                              echo '<span> &nbsp ₹ ' . ($fetch_product['price'] - $fetch_product['price'] * $fetch_product['discount'] / 100) . '</span>';
+
+                           }else{
+                              echo '<span>₹ ' . $fetch_product['price'] . '</span>';
+                           }
+                        ?>
+                        
+                        <!-- <span class="og-price">₹  $fetch_product['price']; ?></span> -->
+                        <!-- <span>₹ </span><$fetch_product['price'] - $fetch_product['price']*$fetch_product['discount']/100; ?><span></span> -->
                            
-                        </div>
+                     </div>
                         
                         <input type="number" name="qty" class="qty" min="1" max="99"
                            onkeypress="if(this.value.length == 2) return false;" value="1">
@@ -218,7 +241,6 @@ include 'components/wishlist_cart.php';
                echo '<p class="empty">no products added yet!</p>';
             }
             ?>
-
          </div>
 
          <div class="swiper-pagination"></div>
@@ -240,6 +262,19 @@ include 'components/wishlist_cart.php';
    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
    <script src="js/script.js"></script>
+
+   <script>
+    function validateForm() {
+        var qtyInput = document.querySelector('.qty');
+        if (qtyInput && qtyInput.value != 5) {
+            alert("Quantity must be 5.");
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+</script>
+
+
 
    <script>
 
@@ -300,7 +335,7 @@ include 'components/wishlist_cart.php';
             },
          },
          autoplay: {
-            delay: 1500, // Delay between slides in milliseconds
+            delay: 4000, // Delay between slides in milliseconds
             disableOnInteraction: false, // Continue sliding even when the user interacts with the slider
          },
       });
@@ -318,7 +353,7 @@ include 'components/wishlist_cart.php';
       'Fresh Produce': ['Fruits', 'Vegetables'],
       'Pantry Staples': ['Rice', 'Flours', 'Pulses', 'Edible Oil', 'Salt & Sugar'],
       'Beverages': ['Tea', 'Coffee', 'Water', 'Fruit Juices', 'Energy and Soft drinks'],
-      'Snacks': ['Biscuits & Cookies', 'Noodles, Pasta', 'Chocolates', 'Snacks & Namkeens', 'Indian Mithai'],
+      'Snacks': ['Biscuits & Cookies', 'Noodles, Pasta', 'Chocolates', 'Snacks and Namkeens', 'Indian Mithai'],
       'Dairy and Eggs': ['Milk', 'Eggs', 'Cheese'],
       'Fish and Meat': ['Fish', 'Chicken', 'Beef', 'Pork'],
       'Personal Care': ['Shampoo', 'Soap', 'Toothpaste', 'Body Lotion', 'Deodorant'],
@@ -351,11 +386,11 @@ include 'components/wishlist_cart.php';
 <script>
     const subCategories = {
       'Fresh Produce': ['Fruits', 'Vegetables'],
-      'Pantry Staples': ['Rice', 'Flours', 'Pulses', 'Edible Oil', 'Salt & Sugar'],
-      'Beverages': ['Tea', 'Coffee', 'Water', 'Fruit Juices', 'Energy and Soft drinks'],
-      'Snacks': ['Biscuits & Cookies', 'Noodles, Pasta', 'Chocolates', 'Snacks & Namkeens', 'Indian Mithai'],
+      'Pantry Staples': ['Rice', 'Flours', 'Pulses'],
+      'Beverages': ['Tea', 'Coffee', 'Water',  'Energy and Soft drinks'],
+      'Snacks': ['Biscuits and Cookies',  'Chocolates',  'Indian Mithai'],
       'Dairy and Eggs': ['Milk', 'Eggs', 'Cheese'],
-      'Fish and Meat': ['Fish', 'Chicken', 'Beef', 'Pork'],
+      'Fish and Meat': ['Fish', 'Chicken'],
       'Personal Care': ['Shampoo', 'Soap', 'Toothpaste', 'Body Lotion', 'Deodorant'],
       // Add more categories and subcategories here...
     };

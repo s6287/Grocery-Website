@@ -46,6 +46,8 @@ if(isset($_POST['add_product'])){
    $image_tmp_name_03 = $_FILES['image_03']['tmp_name'];
    $image_folder_03 = '../uploaded_img/'.$image_03;
 
+   
+
    $select_products = $conn->prepare("SELECT * FROM `products` WHERE name = ?");
    $select_products->execute([$name]);
 
@@ -211,8 +213,8 @@ if(isset($_GET['delete'])){
    <div class="box">
       <img src="../uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
-      <div class="name"><?= $fetch_products['category']; ?></div>
-      <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
+      <!-- <div class="name"><?= $fetch_products['sub_category']; ?></div> -->
+      <div class="price">₹<span><?= $fetch_products['price']; ?></span>/-</div>
       <div class="details"><span><?= $fetch_products['details']; ?></span></div>
       <div class="flex-btn">
          <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
@@ -246,9 +248,9 @@ if(isset($_GET['delete'])){
    // Define the available subcategories for each category
    const subCategories = {
       'Fresh Produce': ['Fruits', 'Vegetables'],
-      'Pantry Staples': ['Rice', 'Flours', 'Pulses', 'Edible Oil', 'Salt & Sugar'],
+      'Pantry Staples': ['Rice', 'Flours', 'Pulses', 'Edible Oil', 'Salt and Sugar'],
       'Beverages': ['Tea', 'Coffee', 'Water', 'Fruit Juices', 'Energy and Soft drinks'],
-      'Snacks': ['Biscuits & Cookies', 'Noodles, Pasta', 'Chocolates', 'Snacks & Namkeens', 'Indian Mithai'],
+      'Snacks': ['Biscuits and Cookies', 'Noodles, Pasta', 'Chocolates', 'Snacks and Namkeens', 'Indian Mithai'],
       'Dairy and Eggs': ['Milk', 'Eggs', 'Cheese'],
       'Fish and Meat': ['Fish', 'Chicken', 'Mutton'],
       'Personal Care': ['Shampoo', 'Soap', 'Toothpaste', 'Body Lotion', 'Deodorant'],

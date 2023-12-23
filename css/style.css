@@ -1083,7 +1083,7 @@ span.og-price{
    z-index: 999;
    width: 100%;
   height: 5rem;
-   background-color: #f0f0f0;
+   background-color: #33342D ;
 
 }
 .categories-nav{
@@ -1099,12 +1099,14 @@ span.og-price{
   align-items: center;
   justify-content: space-around;
    height: 70%;
+   
 }
 
 .nav-category:hover{
    text-decoration: underline;
    cursor: pointer;
    color: #84C225;
+   
 }
 
 .sub_categories{
